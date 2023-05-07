@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:mcontrol/src/shared/widgets/custom_drawer.dart';
-import 'package:mcontrol/src/shared/widgets/user_image_button.dart';
+import 'package:mcontrol/core/shared/widgets/custom_drawer.dart';
+import 'package:mcontrol/core/shared/widgets/user_image_button.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePageBkp extends StatefulWidget {
+  const HomePageBkp({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageBkp> createState() => _HomePageBkpState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageBkpState extends State<HomePageBkp> {
   @override
   Widget build(BuildContext context) {
     //return const ScaffoldOld();
@@ -98,11 +96,13 @@ class NewScaffoldWidget extends StatelessWidget {
               child: Container(
                 width: size.width,
                 height: size.height / 3,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.horizontal(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.horizontal(
                     left: Radius.circular(10),
                     right: Radius.circular(10),
                   ),
+                  color: Theme.of(context).primaryColor,
+                  /*
                   gradient: LinearGradient(
                     colors: [
                       Color(0xff8d70fe),
@@ -111,6 +111,7 @@ class NewScaffoldWidget extends StatelessWidget {
                     begin: Alignment.centerRight,
                     end: Alignment.bottomLeft,
                   ),
+                  */
                 ),
                 child: Column(
                   children: const [

@@ -20,12 +20,12 @@ class BankRepository implements IBankRepository {
   }
 
   @override
-  Future<Either<Exception, List>> get() async {
+  Future<Either<Error, List>> get() async {
     try {
       final result = await _dataSource.get();
       return Right(result);
     } catch (e) {
-      return Left(Exception());
+      return Left(Error());
     }
   }
 

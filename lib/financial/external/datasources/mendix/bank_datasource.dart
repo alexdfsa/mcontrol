@@ -11,13 +11,15 @@ class BankDataSource implements IBankDataSource {
   late Uno uno;
   final resource =
       '${MendixConfig.baseUrl}/${MendixConfig.oDataServiceVersionSendBox}/Banks';
-
+  final String url =
+      'https://mcontrol-sandbox.mxapps.io//odata/Published_OData_service/v1/Banks';
   BankDataSource(this.uno);
 
   @override
   Future<FinancialBank> delete(FinancialBank entity) async {
     try {
-      final response = await uno.delete('$resource(${entity.code})');
+      //final response = await uno.delete('$resource(${entity.code})');
+      final response = await uno.delete(url);
       if (response.status != 404) {
         return FinancialBank(
           code: 'code',
@@ -34,13 +36,27 @@ class BankDataSource implements IBankDataSource {
   @override
   Future<List> get() async {
     try {
+      //final response = await uno.get(
+      //  resource,
+      //  headers: {
+      //    "Mendix-Username": "alex@chycharry.com.br",
+      //    "Mendix-ApiKey": MendixConfig.apiKey,
+      //    HttpHeaders.acceptHeader: "*/*",
+      //    HttpHeaders.accessControlAllowOriginHeader: "*",
+      // },
+      //);
+
       final response = await uno.get(
-        resource,
+        validateStatus: (status) {
+          print(status);
+          return true;
+        },
+        responseType: ResponseType.json,
+        url,
         headers: {
-          "Mendix-Username": "alex@chycharry.com.br",
+          "Accept": "*/*",
+          "Content-Type": "application/json; charset=utf-8",
           "Mendix-ApiKey": MendixConfig.apiKey,
-          HttpHeaders.acceptHeader: "*/*",
-          HttpHeaders.accessControlAllowOriginHeader: "*",
         },
       );
       if (response.status == 200) {

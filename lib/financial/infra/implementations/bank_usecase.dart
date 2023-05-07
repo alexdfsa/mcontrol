@@ -15,7 +15,7 @@ class BankUseCase implements IBankUseCase {
   }
 
   @override
-  Future<Either<Exception, List>> get() async {
+  Future<Either<Error, List>> get() async {
     final results = _repository.get();
     return results;
   }

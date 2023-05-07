@@ -33,10 +33,16 @@ class _BankPageState extends State<BankPage> {
     return ScopedBuilder<BankStore, List<dynamic>>(
       store: store,
       onError: (_, error) {
-        return const Center(
-          child: Icon(
-            Icons.search_off_rounded,
-            size: 150,
+        return Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.search_off_rounded,
+                size: 150,
+              ),
+              Text(error.toString()),
+            ],
           ),
         );
       },

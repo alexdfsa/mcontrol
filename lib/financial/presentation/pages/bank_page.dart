@@ -51,11 +51,18 @@ class _BankPageState extends State<BankPage> {
       ),
       onState: (_, List state) {
         return SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: 15),
-              Text(state[0].code.toString()),
-            ],
+          child: ListView.separated(
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Text(state[index].code),
+                title: Text(state[index].name),
+              );
+            },
+            separatorBuilder: (context, index) => Container(
+              height: 10,
+            ),
+            itemCount: state.length,
           ),
         );
       },

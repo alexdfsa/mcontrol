@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:mcontrol/financial/external/datasources/mendix/mendix_config.dart';
 import 'package:mcontrol/financial/infra/models/finantial_bank_dto.dart';
 import 'package:uno/uno.dart';
@@ -12,7 +10,7 @@ class BankDataSource implements IBankDataSource {
   final resource =
       '${MendixConfig.baseUrl}/${MendixConfig.oDataServiceVersionSendBox}/Banks';
   final String url =
-      'https://mcontrol-sandbox.mxapps.io//odata/Published_OData_service/v1/Banks';
+      'https://mcontrol-sandbox.mxapps.io/odata/Published_OData_service/v1/Banks';
   BankDataSource(this.uno);
 
   @override
@@ -47,21 +45,14 @@ class BankDataSource implements IBankDataSource {
       //);
 
       final response = await uno.get(
-        validateStatus: (status) {
-          print(status);
-          return true;
-        },
-        responseType: ResponseType.json,
         url,
         headers: {
           "Accept": "*/*",
-          "Content-Type": "application/json; charset=utf-8",
           "Mendix-ApiKey": MendixConfig.apiKey,
         },
       );
       if (response.status == 200) {
-        // ignore: unnecessary_parenthesis
-        final list = ((response.data as List)
+        final list = ((response.data['value'] as List)
             .map(
               (
                 e,

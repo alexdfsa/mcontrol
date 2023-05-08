@@ -13,7 +13,7 @@ class CustomDrawer extends StatelessWidget {
             Navigator.of(context).pushNamed('/home');
             break;
           case 1:
-            Navigator.of(context).pushNamed('/financial/bank');
+            Navigator.of(context).pushNamed('/financial/bankOverview');
             break;
           case 2:
             Navigator.of(context).pushNamed('config');

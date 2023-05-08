@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mcontrol/financial/external/datasources/mendix/mendix_config.dart';
 import 'package:mcontrol/financial/infra/models/finantial_bank_dto.dart';
 import 'package:uno/uno.dart';
@@ -6,11 +7,14 @@ import 'package:mcontrol/financial/domain/entities/financial_bank.dart';
 import 'package:mcontrol/financial/infra/datasources/i_bank_datasource.dart';
 
 class BankDataSource implements IBankDataSource {
+  //TODO: remove import 'package:flutter/material.dart';
   late Uno uno;
   final resource =
       '${MendixConfig.baseUrl}/${MendixConfig.oDataServiceVersionSendBox}/Banks';
+  //final String url =
+  //    'https://mcontrol-sandbox.mxapps.io/odata/Published_OData_service/v1/Banks';
   final String url =
-      'https://mcontrol-sandbox.mxapps.io/odata/Published_OData_service/v1/Banks';
+      'http://10.20.30.106:8080/odata/Published_OData_service/v1/Banks';
   BankDataSource(this.uno);
 
   @override
@@ -27,12 +31,43 @@ class BankDataSource implements IBankDataSource {
         throw Exception();
       }
     } catch (e) {
+      debugPrint(e.toString());
       throw Exception(e);
     }
   }
 
   @override
-  Future<List> get() async {
+  Future<FinancialBank> get(String code) async {
+    try {
+      final response = await uno.get(
+        url,
+        params: {},
+        headers: {
+          "Accept": "*/*",
+          "Mendix-ApiKey": MendixConfig.apiKey,
+        },
+      );
+      if (response.status == 200) {
+        final list = ((response.data['value'] as List)
+            .map(
+              (
+                e,
+              ) =>
+                  FinancialBankDTO.fromMap(e),
+            )
+            .toList());
+        return list[0];
+      } else {
+        throw Exception();
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future<List<FinancialBank>> getList() async {
     try {
       //final response = await uno.get(
       //  resource,
@@ -43,7 +78,6 @@ class BankDataSource implements IBankDataSource {
       //    HttpHeaders.accessControlAllowOriginHeader: "*",
       // },
       //);
-
       final response = await uno.get(
         url,
         headers: {
@@ -65,6 +99,7 @@ class BankDataSource implements IBankDataSource {
         throw Exception();
       }
     } catch (e) {
+      debugPrint(e.toString());
       throw Exception(e);
     }
   }
@@ -82,6 +117,7 @@ class BankDataSource implements IBankDataSource {
         throw Exception();
       }
     } catch (e) {
+      debugPrint(e.toString());
       throw Exception(e);
     }
   }
@@ -101,6 +137,7 @@ class BankDataSource implements IBankDataSource {
         throw Exception();
       }
     } catch (e) {
+      debugPrint(e.toString());
       throw Exception(e);
     }
   }
@@ -118,6 +155,7 @@ class BankDataSource implements IBankDataSource {
         throw Exception();
       }
     } catch (e) {
+      debugPrint(e.toString());
       throw Exception(e);
     }
   }

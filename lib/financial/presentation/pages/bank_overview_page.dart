@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mcontrol/financial/presentation/stores/bank_store.dart';
+import 'package:mcontrol/financial/domain/entities/financial_bank.dart';
+import 'package:mcontrol/financial/presentation/stores/bank_list_store.dart';
 import 'package:mobx_triple/mobx_triple.dart';
 
-class BankPage extends StatefulWidget {
-  const BankPage({super.key});
+class BankOverviewPage extends StatefulWidget {
+  const BankOverviewPage({super.key});
 
   @override
-  State<BankPage> createState() => _BankPageState();
+  State<BankOverviewPage> createState() => _BankOverviewPageState();
 }
 
-class _BankPageState extends State<BankPage> {
+class _BankOverviewPageState extends State<BankOverviewPage> {
   @override
   void initState() {
     super.initState();
-    store.get();
+    store.getList();
   }
 
-  final store = Modular.get<BankStore>();
+  final store = Modular.get<BankListStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +27,18 @@ class _BankPageState extends State<BankPage> {
         title: const Text('Bank'),
       ),
       body: newMethod(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          FinancialBank bank = FinancialBank(code: '', name: '');
+          Modular.to.pushNamed('/bank', arguments: bank);
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
-  ScopedBuilder<BankStore, List<dynamic>> newMethod() {
-    return ScopedBuilder<BankStore, List<dynamic>>(
+  ScopedBuilder<BankListStore, List<FinancialBank>> newMethod() {
+    return ScopedBuilder<BankListStore, List<FinancialBank>>(
       store: store,
       onError: (_, error) {
         return Center(

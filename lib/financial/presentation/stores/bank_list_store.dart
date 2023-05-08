@@ -2,14 +2,14 @@ import 'package:mcontrol/financial/domain/entities/financial_bank.dart';
 import 'package:mcontrol/financial/domain/usecases/i_bank_usecase.dart';
 import 'package:mobx_triple/mobx_triple.dart';
 
-class BankStore extends MobXStore<FinancialBank> {
+class BankListStore extends MobXStore<List<FinancialBank>> {
   final IBankUseCase usecase;
 
-  BankStore(this.usecase) : super(FinancialBank(code: '', name: ''));
+  BankListStore(this.usecase) : super(<FinancialBank>[]);
 
-  Future<void> get(String code) async {
+  Future<void> getList() async {
     setLoading(true);
-    final result = await usecase.get(code);
+    final result = await usecase.getList();
     result.fold(
       (l) {
         setError(l);

@@ -20,13 +20,19 @@ class BankRepository implements IBankRepository {
   }
 
   @override
-  Future<Either<Error, List>> get() async {
+  Future<Either<Error, List<FinancialBank>>> getList() async {
     try {
-      final result = await _dataSource.get();
+      final result = await _dataSource.getList();
       return Right(result);
     } catch (e) {
       return Left(Error());
     }
+  }
+
+  @override
+  Future<Either<Error, FinancialBank>> get(String code) {
+    // TODO: implement get
+    throw UnimplementedError();
   }
 
   @override

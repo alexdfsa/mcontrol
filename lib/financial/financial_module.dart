@@ -20,7 +20,7 @@ class FinancialModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/financial/bank',
+        ChildRoute('/bank',
             child: ((context, args) => BankNewEditPage(
                   bank: args.data,
                 ))),

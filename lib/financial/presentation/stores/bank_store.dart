@@ -9,13 +9,18 @@ class BankStore extends MobXStore<FinancialBank> {
 
   Future<void> get(String code) async {
     setLoading(true);
-    final result = await usecase.get(code);
-    result.fold(
-      (l) {
-        setError(l);
-        setLoading(false);
-      },
-      update,
-    );
+    if (code.isNotEmpty) {
+      final result = await usecase.get(code);
+      result.fold(
+        (l) {
+          setError(l);
+          setLoading(false);
+        },
+        update,
+      );
+    } else {
+      setLoading(false);
+      update;
+    }
   }
 }

@@ -9,7 +9,7 @@ class BankUseCase implements IBankUseCase {
   BankUseCase(this._repository);
 
   @override
-  Future<Either<Exception, FinancialBank>> delete(FinancialBank entity) {
+  Future<Either<Error, FinancialBank>> delete(FinancialBank entity) {
     final results = _repository.delete(entity);
     return results;
   }
@@ -27,19 +27,19 @@ class BankUseCase implements IBankUseCase {
   }
 
   @override
-  Future<Either<Exception, FinancialBank>> patch(FinancialBank entity) async {
+  Future<Either<Error, FinancialBank>> patch(FinancialBank entity) async {
     final results = _repository.patch(entity);
     return results;
   }
 
   @override
-  Future<Either<Exception, FinancialBank>> post(FinancialBank entity) {
+  Future<Either<Error, FinancialBank>> post(FinancialBank entity) async {
     final results = _repository.post(entity);
     return results;
   }
 
   @override
-  Future<Either<Exception, FinancialBank>> put(FinancialBank entity) {
+  Future<Either<Error, FinancialBank>> put(FinancialBank entity) {
     final results = _repository.put(entity);
     return results;
   }

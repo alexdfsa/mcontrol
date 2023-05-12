@@ -30,7 +30,7 @@ class _BankOverviewPageState extends State<BankOverviewPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           FinancialBank bank = FinancialBank(code: '', name: '');
-          Modular.to.pushNamed('/bank', arguments: bank);
+          Modular.to.pushNamed('/financial/bank', arguments: bank);
         },
         child: const Icon(Icons.add),
       ),

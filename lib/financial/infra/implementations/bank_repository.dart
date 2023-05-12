@@ -9,13 +9,13 @@ class BankRepository implements IBankRepository {
   BankRepository(this._dataSource);
 
   @override
-  Future<Either<Exception, FinancialBank>> delete(FinancialBank entity) async {
+  Future<Either<Error, FinancialBank>> delete(FinancialBank entity) async {
     try {
       final result = await _dataSource.delete(entity);
 
       return Right(result);
     } catch (e) {
-      return Left(Exception());
+      return Left(Error());
     }
   }
 
@@ -36,35 +36,35 @@ class BankRepository implements IBankRepository {
   }
 
   @override
-  Future<Either<Exception, FinancialBank>> patch(FinancialBank entity) async {
+  Future<Either<Error, FinancialBank>> patch(FinancialBank entity) async {
     try {
       final result = await _dataSource.patch(entity);
 
       return Right(result);
     } catch (e) {
-      return Left(Exception());
+      return Left(Error());
     }
   }
 
   @override
-  Future<Either<Exception, FinancialBank>> post(FinancialBank entity) async {
+  Future<Either<Error, FinancialBank>> post(FinancialBank entity) async {
     try {
       final result = await _dataSource.post(entity);
 
       return Right(result);
     } catch (e) {
-      return Left(Exception());
+      return Left(Error());
     }
   }
 
   @override
-  Future<Either<Exception, FinancialBank>> put(FinancialBank entity) async {
+  Future<Either<Error, FinancialBank>> put(FinancialBank entity) async {
     try {
       final result = await _dataSource.put(entity);
 
       return Right(result);
     } catch (e) {
-      return Left(Exception());
+      return Left(Error());
     }
   }
 }
